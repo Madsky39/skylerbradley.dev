@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Monster Lab case study | Skyler Bradley"
+  description="A reproducible Python analytics project exploring monster difficulty, cross-system scaling, model limitations, and simulated outcomes."
+>
+  <article class="case-study">
+    <header class="case-hero shell">
+      <a class="back-link" href="/#work">← Selected work</a>
+      <p class="eyebrow">Data analytics · Public project</p>
+      <h1>Monster Lab</h1>
+      <p class="case-deck">A weekend analytics project that grew into a reproducible data pipeline, empirical difficulty study, converter, and interactive exploration tool.</p>
+      <div class="case-facts">
+        <div><span>Stack</span><strong>Python, SQLite, Streamlit</strong></div>
+        <div><span>Data</span><strong>565 licensed monster records</strong></div>
+        <div><span>Methods</span><strong>Regression, matching, simulation</strong></div>
+      </div>
+      <div class="case-actions">
+        <a class="button primary" href="https://github.com/Madsky39/shadowdark-monster-lab" rel="noreferrer">View public repository</a>
+      </div>
+    </header>
+
+    <div class="metric-strip shell" aria-label="Project results">
+      <div><strong>99.7%</strong><span>attack clauses parsed</span></div>
+      <div><strong>143</strong><span>cross-system matches</span></div>
+      <div><strong>0.82</strong><span>interpretable no-HP model R²</span></div>
+      <div><strong>2,000</strong><span>trials per monster</span></div>
+    </div>
+
+    <div class="prose shell narrow">
+      <section>
+        <p class="eyebrow">The question</p>
+        <h2>What actually makes a monster difficult?</h2>
+        <p>The first question was descriptive: which printed combat statistics track Shadowdark monster level? The more useful question followed: after removing rules-derived variables, which measurable traits still explain difficulty, and do those traits agree with simulated outcomes?</p>
+        <p>The project combines 243 freely licensed Shadowdark core monsters with 322 D&amp;D 5e SRD monsters. It normalizes both systems into SQLite, parses attack text, builds a cross-system match table, fits simple models, and presents the results through a multipage Streamlit application.</p>
+      </section>
+
+      <section>
+        <p class="eyebrow">Pipeline</p>
+        <h2>Keep ingestion, analysis, and presentation reproducible.</h2>
+        <div class="decision-grid">
+          <div><span>01</span><h3>Source-specific ingestion</h3><p>Independent scripts rebuild each table from licensed source data, making failures attributable and the pipeline safe to rerun.</p></div>
+          <div><span>02</span><h3>Explicit text parsing</h3><p>A documented grammar converts attack clauses into structured features and reports clauses it cannot admit instead of silently guessing.</p></div>
+          <div><span>03</span><h3>Cross-system matching</h3><p>Exact and fuzzy matches create 143 comparable monster pairs, with lower-confidence candidates separated for manual review.</p></div>
+          <div><span>04</span><h3>Shared analytical functions</h3><p>The reports, command-line tools, and dashboard use the same fit and metric functions so the displayed result cannot drift from the analysis.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <p class="eyebrow">Model criticism</p>
+        <h2>The strongest first model was also the least interesting.</h2>
+        <p>An initial level model reached R² = 0.997. That looked impressive until the data-generating process was considered: Shadowdark assigns one hit die per level, so HP is largely derived from the target variable. The model confirmed the dataset followed the rules, but it did not explain difficulty.</p>
+        <p>The revised no-HP model reached R² = 0.817 using AC, attack bonus, damage, number of attacks, and best stat modifier. Its residuals were more informative. Spellcasters and monsters built around petrification, regeneration, curses, or other rider effects appeared as expected failures because those mechanics are not represented by attack math alone.</p>
+      </section>
+
+      <blockquote>A high score is not automatically a useful model. The feature lineage determines what the score means.</blockquote>
+
+      <section>
+        <p class="eyebrow">Empirical validation</p>
+        <h2>Compare printed difficulty with simulated outcomes.</h2>
+        <p>A seeded Monte Carlo simulator runs a fixed reference party against each core monster. The simulation is intentionally bounded: it models attacks, defenses, targeting, critical hits, and individually constructed characters, while acknowledging that prose-driven abilities remain outside the model.</p>
+        <p>A derived threat score correlates with simulated win rate better than printed level on both the level-matched subset and the complete monster set. Disagreements become useful findings rather than model embarrassment: they identify monsters whose danger comes from mechanics the structured features cannot see.</p>
+        <ul class="check-list">
+          <li>Per-monster seeded trials reproduce exact result files</li>
+          <li>Fixed and rerolled party variance answer different questions explicitly</li>
+          <li>Difficulty findings are reported alongside limitations</li>
+          <li>Tests cover parser behavior, metric formulas, simulation invariants, and data gating</li>
+        </ul>
+      </section>
+
+      <section>
+        <p class="eyebrow">Licensing boundary</p>
+        <h2>Public data stays public. Owned-book data stays local.</h2>
+        <p>The public pipeline uses the freely licensed Shadowdark core dataset and the D&amp;D 5e SRD. Optional parsing for personally owned books writes only to a gitignored local database and is gated from the deployed application. This separates a useful local workflow from what the project is allowed to redistribute.</p>
+        <p class="disclosure">Monster Lab is an independent product published under the Shadowdark RPG Third-Party License and is not affiliated with The Arcane Library, LLC. Shadowdark RPG © 2023 The Arcane Library, LLC. The project also uses SRD 5.1 material under CC BY 4.0.</p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

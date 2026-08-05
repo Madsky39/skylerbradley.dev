@@ -29,6 +29,7 @@ The deployable site is written to `dist/`.
 6. Confirm these routes:
    - `/`
    - `/projects/secure-homelab/`
+   - `/projects/monster-lab/`
    - `/notes/`
    - `/sitemap-index.xml`
 7. Confirm HTTPS is enabled and the domain redirects HTTP to HTTPS.

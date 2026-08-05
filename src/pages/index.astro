@@ -26,9 +26,9 @@ import ProjectCard from '../components/ProjectCard.astro';
         <p class="eyebrow">Current signal</p>
         <p class="signal-title">Building systems that can explain themselves.</p>
         <div class="signal-lines">
-          <span><b>01</b> Deterministic engineering</span>
+          <span><b>01</b> Applied analytics</span>
           <span><b>02</b> Secure infrastructure</span>
-          <span><b>03</b> Applied data science</span>
+          <span><b>03</b> Reproducible research</span>
         </div>
       </aside>
     </div>
@@ -44,6 +44,14 @@ import ProjectCard from '../components/ProjectCard.astro';
         <p>Case studies focused on constraints, design decisions, evidence, and the tradeoffs behind the result.</p>
       </div>
       <div class="project-grid">
+        <ProjectCard
+          href="/projects/monster-lab/"
+          eyebrow="Featured · Data analytics"
+          title="Monster Lab"
+          description="A reproducible analytics pipeline and dashboard examining game difficulty, cross-system scaling, model limitations, and simulated outcomes."
+          tags={['Python', 'SQLite', 'scikit-learn', 'Streamlit']}
+          status="Public"
+        />
         <ProjectCard
           href="/projects/secure-homelab/"
           eyebrow="Infrastructure · Security"
