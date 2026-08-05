@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Lean Pantry case study | Skyler Bradley" description="Designing a practical meal-planning application with a curated recipe dataset, editable plans, scaled ingredients, and grocery lists.">
+  <article class="case-study">
+    <header class="case-hero shell">
+      <a class="back-link" href="/#work">← Selected work</a>
+      <p class="eyebrow">Product engineering</p>
+      <h1>Lean Pantry</h1>
+      <p class="case-deck">A focused application that turns a curated meal dataset into a weekly plan people can actually edit, cook from, and shop with.</p>
+      <div class="case-facts">
+        <div><span>Stack</span><strong>Python, Streamlit, SQLite</strong></div>
+        <div><span>Dataset</span><strong>100 complete meals</strong></div>
+        <div><span>Deployment</span><strong>Private persistent service</strong></div>
+      </div>
+    </header>
+    <div class="case-image shell compact-image">
+      <img src="/images/lean-pantry-ui.png" alt="Lean Pantry weekly meal planning interface" width="1365" height="768" />
+    </div>
+    <div class="prose shell narrow">
+      <section><p class="eyebrow">The problem</p><h2>A generated meal list is not yet a usable plan.</h2><p>The useful unit is a connected workflow: choose meals, adjust portions and directions, consolidate ingredients, and carry the result into shopping and cooking. Lean Pantry keeps those steps together instead of producing a disposable recommendation.</p></section>
+      <section><p class="eyebrow">Product decisions</p><h2>Constrain the data before expanding the interface.</h2><p>The application uses a curated set of complete recipes rather than scraping an unreliable long tail. Ingredients scale with servings, cooking directions remain editable, and weekly cards expose the information needed at the moment of use.</p><ul class="check-list"><li>Persistent local data rather than session-only output</li><li>Scaled ingredients and consolidated grocery lists</li><li>Editable, numbered cooking directions</li><li>Resource-capped, private deployment</li></ul></section>
+      <section><p class="eyebrow">Tradeoff</p><h2>Curation wins quality but limits breadth.</h2><p>A 100-meal library cannot offer infinite novelty. It can, however, provide consistent ingredient structures and complete directions. The next meaningful improvement would be better preference feedback, not simply adding thousands of uneven recipes.</p></section>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="A backup is not trusted until restoration succeeds | Skyler Bradley" description="Why successful backup jobs are not enough, and how a practical restore test verifies recoverability.">
+  <article class="article-page shell narrow">
+    <a class="back-link" href="/notes/">← Field notes</a>
+    <header>
+      <p class="note-meta"><time datetime="2026-08-04">August 4, 2026</time> · Infrastructure security · 6 min read</p>
+      <h1>A backup is not trusted until restoration succeeds</h1>
+      <p class="article-deck">A green backup job proves that data was written somewhere. It does not prove that the right data can be recovered when the original system is gone.</p>
+    </header>
+    <div class="article-body">
+      <p>Backup dashboards are good at reporting activity. Files were scanned, chunks were uploaded, retention rules ran, and the job exited successfully. Those signals matter, but they answer an easier question than the one an incident creates.</p>
+      <p>The operational question is whether a replacement system can recover the required data, configuration, and credentials within an acceptable amount of time. That requires a restore test.</p>
+      <h2>Successful storage is not successful recovery</h2>
+      <p>A backup can complete while excluding an important directory. A repository can be healthy while the decryption key is unavailable. A restore can produce files whose ownership prevents the service from starting. Every component can work as designed while the recovery outcome still fails.</p>
+      <p>This is why backup success should be treated as evidence, not assurance. Assurance comes from exercising the complete path.</p>
+      <h2>Define the recovery unit first</h2>
+      <p>“Restore the server” is usually too vague to test well. A useful recovery unit is a specific service or dataset with explicit dependencies. For an application, that may include its database, uploaded files, configuration, service identity, and the secret needed to decrypt the backup.</p>
+      <p>The test should state what counts as recovered. Files merely existing on disk is rarely enough. The application may need to start, authenticate correctly, expose expected records, and pass a small functional check.</p>
+      <h2>Restore somewhere disposable</h2>
+      <p>A restore test should not overwrite the production system it is meant to protect. Use a temporary directory, isolated virtual machine, or other bounded target. This makes the exercise safe to repeat and exposes assumptions about absolute paths, host-specific permissions, and undocumented dependencies.</p>
+      <p>The operator performing the test should begin with the documentation and approved recovery materials, not hidden knowledge from the original build session. If the procedure depends on memory, the procedure is incomplete.</p>
+      <h2>Collect evidence that maps to failure modes</h2>
+      <p>A useful record includes the backup snapshot selected, restore target, elapsed time, integrity checks, application validation, and every manual correction required. Those corrections are findings. They identify where automation or documentation still falls short.</p>
+      <p>Hash comparison can prove restored files match a source dataset. Service checks can prove configuration and permissions are sufficient. A measured recovery time can be compared with the actual recovery objective instead of an optimistic estimate.</p>
+      <h2>Test the key path separately</h2>
+      <p>Encrypted backups move the most important failure point to key recovery. The backup host should not be the only place the decryption material exists, and the test should prove that an authorized operator can obtain it through the intended emergency process.</p>
+      <p>This does not mean making keys broadly available. It means ensuring that loss of one machine, one account, or one person does not make every retained snapshot useless.</p>
+      <h2>Make restoration routine</h2>
+      <p>A single successful test establishes a baseline, not permanent trust. Applications change, permissions drift, datasets grow, and retention policies remove older snapshots. Restore testing should recur often enough to detect those changes before an incident does.</p>
+      <p>The useful security control is not “we run backups.” It is “we can demonstrate recovery from a defined failure using a repeatable process.”</p>
+    </div>
+  </article>
+</BaseLayout>

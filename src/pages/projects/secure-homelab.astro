@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Secure homelab case study | Skyler Bradley" description="A sanitized case study in threat modeling, private networking, least privilege, service isolation, and verified backups.">
+  <article class="case-study">
+    <header class="case-hero shell">
+      <a class="back-link" href="/#work">← Selected work</a>
+      <p class="eyebrow">Infrastructure · Security</p>
+      <h1>A small homelab with a real threat model</h1>
+      <p class="case-deck">Defense in depth for useful self-hosting, designed around private access, constrained failure domains, and recoverability.</p>
+      <div class="case-facts">
+        <div><span>Scope</span><strong>Compute, storage, services</strong></div>
+        <div><span>Controls</span><strong>Identity, network, host, backup</strong></div>
+        <div><span>Constraint</span><strong>No public exposure</strong></div>
+      </div>
+    </header>
+    <div class="prose shell narrow">
+      <section>
+        <p class="eyebrow">Threat model</p>
+        <h2>Remote access should not require making private services public.</h2>
+        <p>The design assumes internet-originated scanning, stolen endpoint credentials, vulnerable applications, accidental administrator actions, and storage failure. It avoids treating a single firewall or password as the complete security boundary.</p>
+      </section>
+      <section>
+        <p class="eyebrow">Architecture</p>
+        <h2>Layer controls so one mistake is not the whole incident.</h2>
+        <div class="decision-grid">
+          <div><span>01</span><h3>Private overlay network</h3><p>Administrative and application access travels over authenticated private networking rather than inbound public ports.</p></div>
+          <div><span>02</span><h3>Default-deny hosts</h3><p>Host firewalls explicitly admit required traffic and keep management paths narrower than application access.</p></div>
+          <div><span>03</span><h3>Least-privileged services</h3><p>Applications run as dedicated non-administrative identities with resource limits and service-specific access.</p></div>
+          <div><span>04</span><h3>Backups proved by restore</h3><p>Encrypted scheduled backups are monitored, and a restore test verifies more than the existence of backup files.</p></div>
+        </div>
+      </section>
+      <section>
+        <p class="eyebrow">Outcome</p>
+        <h2>A maintainable security posture, not a maximalist one.</h2>
+        <p>The resulting environment supports persistent private services, centralized storage, and remote administration without public application exposure. Automated security updates and recurring audits reduce routine maintenance, while documented recovery paths make failure less dramatic.</p>
+        <p class="disclosure">This case study is intentionally sanitized. Hostnames, addresses, firewall rules, service URLs, account names, and topology details are omitted.</p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

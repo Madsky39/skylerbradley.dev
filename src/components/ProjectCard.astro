@@ -1,0 +1,26 @@
+---
+interface Props {
+  href: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  tags: string[];
+  status?: string;
+}
+
+const { href, eyebrow, title, description, tags, status } = Astro.props;
+---
+
+<article class="project-card">
+  <a class="card-link" href={href} aria-label={`Read the ${title} case study`}></a>
+  <div class="card-topline">
+    <p class="eyebrow">{eyebrow}</p>
+    {status && <span class="status">{status}</span>}
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul class="tag-list" aria-label="Technologies and themes">
+    {tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+  <span class="text-link" aria-hidden="true">View case study <span>→</span></span>
+</article>
